@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Demo Multimodal</title>
+  <style>
+    body { font-family: system-ui, Arial; max-width: 780px; margin: 40px auto; }
+    .card { border: 1px solid #ddd; padding: 16px; border-radius: 10px; }
+    .row { display: grid; gap: 12px; }
+    .btn { padding: 10px 16px; border: 0; background: #111; color: #fff; border-radius: 8px; cursor: pointer; }
+    .btn:hover { opacity: .9; }
+    input, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 8px; width: 100%; }
+  </style>
+</head>
+<body>
+  <h1>Demo Multimodal (Texto + Imagen)</h1>
+  <div class="card">
+    <form action="/analyze" method="post" enctype="multipart/form-data" class="row">
+      <label>Texto:
+        <textarea name="text" rows="3" placeholder="Escribe algo..."></textarea>
+      </label>
+      <label>Imagen:
+        <input type="file" name="image" accept="image/*">
+      </label>
+      <button class="btn" type="submit">Enviar</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Resultado</title>
+  <style>
+    body { font-family: system-ui, Arial; max-width: 780px; margin: 40px auto; }
+    .card { border: 1px solid #ddd; padding: 16px; border-radius: 10px; }
+    img { max-width: 100%; border-radius: 8px; }
+    pre { background: #f6f6f6; padding: 12px; border-radius: 8px; }
+    a { text-decoration: none; }
+  </style>
+</head>
+<body>
+  <a href="/">← Volver</a>
+  <h1>Resultado</h1>
+  <div class="card">
+    {% if text %}
+      <h3>Texto enviado</h3>
+      <p>{{ text }}</p>
+    {% endif %}
+
+    {% if image_url %}
+      <h3>Imagen</h3>
+      <img src="{{ image_url }}" alt="preview">
+      {% if info %}
+        <h4>Metadatos</h4>
+        <pre>{{ info | tojson(indent=2) }}</pre>
+      {% endif %}
+    {% else %}
+      <p>No se subió imagen o el formato no es válido.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

@@ -1,7 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
 
-# Nunca subir llaves/secretos
-*.pem
-*.key
-id_*
-A20*
-*.pub
+# Cargas y datos locales
+app/static/uploads/
+
+# Variables locales
+.env
