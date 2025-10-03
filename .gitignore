@@ -1,0 +1,7 @@
+
+# Nunca subir llaves/secretos
+*.pem
+*.key
+id_*
+A20*
+*.pub
