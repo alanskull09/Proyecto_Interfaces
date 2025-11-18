@@ -12,7 +12,7 @@
   </style>
 </head>
 <body>
-  <a href="/">← Volver</a>
+  <a href="{% url 'home' %}">← Volver</a>
   <h1>Resultado</h1>
   <div class="card">
     {% if text %}
@@ -20,16 +20,13 @@
       <p>{{ text }}</p>
     {% endif %}
 
-    {% if image_url %}
-      <h3>Imagen</h3>
-      <img src="{{ image_url }}" alt="preview">
-      {% if info %}
-        <h4>Metadatos</h4>
-        <pre>{{ info | tojson(indent=2) }}</pre>
-      {% endif %}
+    {% if info %}
+      <h3>Información de la imagen</h3>
+      <pre>{{ info }}</pre>
     {% else %}
       <p>No se subió imagen o el formato no es válido.</p>
     {% endif %}
   </div>
 </body>
 </html>
+
