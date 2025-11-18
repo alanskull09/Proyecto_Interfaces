@@ -1,0 +1,102 @@
+[
+  {
+    "model": "sistema.movie",
+    "pk": 1,
+    "fields": {
+      "title": "Jungle Quest",
+      "description": "Un grupo de exploradores viaja a una selva perdida llena de criaturas antiguas.",
+      "year": 2020,
+      "genre": "Aventura",
+      "created_at": "2021-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "sistema.movie",
+    "pk": 2,
+    "fields": {
+      "title": "Sky Raiders",
+      "description": "Pilotos jóvenes intentan sobrevivir en una misión aérea experimental.",
+      "year": 2021,
+      "genre": "Aventura",
+      "created_at": "2021-06-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "sistema.movie",
+    "pk": 3,
+    "fields": {
+      "title": "Mystic Canyon",
+      "description": "Una arqueóloga descubre un cañón que cambia de forma cada día.",
+      "year": 2022,
+      "genre": "Aventura",
+      "created_at": "2022-05-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "sistema.movie",
+    "pk": 4,
+    "fields": {
+      "title": "Lost Kingdom",
+      "description": "Una civilización perdida resurge y cambia el destino del mundo.",
+      "year": 2023,
+      "genre": "Aventura",
+      "created_at": "2023-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "sistema.movie",
+    "pk": 5,
+    "fields": {
+      "title": "Deep Ocean",
+      "description": "Un submarino experimental descubre un ecosistema oculto.",
+      "year": 2024,
+      "genre": "Aventura",
+      "created_at": "2024-03-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "sistema.movie",
+    "pk": 6,
+    "fields": {
+      "title": "Nebula Scouts",
+      "description": "Cadetes espaciales viven su primera misión en una nebulosa peligrosa.",
+      "year": 2025,
+      "genre": "Aventura",
+      "created_at": "2025-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "sistema.review",
+    "pk": 1,
+    "fields": {
+      "movie": 1,
+      "user": 1,
+      "rating": 5,
+      "comment": "Una aventura increíble, muy bien lograda.",
+      "created_at": "2024-05-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "sistema.review",
+    "pk": 2,
+    "fields": {
+      "movie": 2,
+      "user": 1,
+      "rating": 4,
+      "comment": "Muy entretenida y con escenas épicas.",
+      "created_at": "2024-05-02T12:00:00Z"
+    }
+  },
+  {
+    "model": "sistema.review",
+    "pk": 3,
+    "fields": {
+      "movie": 3,
+      "user": 1,
+      "rating": 5,
+      "comment": "El concepto del cañón cambiante está súper original.",
+      "created_at": "2024-05-03T12:00:00Z"
+    }
+  }
+]
+

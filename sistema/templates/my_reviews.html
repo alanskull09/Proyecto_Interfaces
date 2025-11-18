@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mis reseñas</title>
+  <style>
+    body { font-family: system-ui; max-width: 900px; margin: 40px auto; }
+    .card { border:1px solid #ddd; padding:16px; border-radius:10px; margin-bottom:18px; }
+  </style>
+</head>
+<body>
+
+<a href="/movies/">← Volver</a>
+
+<h1>Mis reseñas</h1>
+
+{% if reviews %}
+  {% for r in reviews %}
+    <div class="card">
+      <h3>{{ r.movie.title }} ({{ r.rating }}/5)</h3>
+      <p>{{ r.comment }}</p>
+      <small>{{ r.created_at|date:"d/m/Y H:i" }}</small>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>No tienes reseñas todavía.</p>
+{% endif %}
+
+</body>
+</html>
+

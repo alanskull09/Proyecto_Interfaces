@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reseñas recientes</title>
+    <style>
+        body { font-family: system-ui, Arial; max-width: 900px; margin: 40px auto; }
+        a { text-decoration: none; color: #6b2fb3; }
+        .review-card {
+            border: 1px solid #ddd; padding: 16px; border-radius: 10px;
+            margin-bottom: 18px; background: #fafafa;
+        }
+        .btn {
+            padding: 8px 14px; background: #111; color: #fff;
+            border-radius: 8px; font-size: 0.9rem; border: none; cursor: pointer;
+        }
+        .btn:hover { opacity: .9; }
+    </style>
+</head>
+<body>
+
+<h1>Reseñas recientes</h1>
+
+{% if request.user.is_authenticated %}
+    <p>Hola, <strong>{{ request.user.username }}</strong>. 
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </p>
+
+    <p>
+        <a href="{% url 'movies' %}">Ver películas</a> ·
+        <a href="{% url 'my_reviews' %}">Mis reseñas</a> ·
+        <a href="{% url 'add_movie' %}">Agregar película</a>
+    </p>
+
+{% else %}
+    <p>
+        <a href="{% url 'login' %}">Iniciar sesión</a> ·
+        <a href="{% url 'register' %}">Registrarse</a>
+    </p>
+{% endif %}
+
+<hr>
+
+{% if reviews %}
+    {% for review in reviews %}
+        <div class="review-card">
+            <h3>{{ review.movie.title }} ({{ review.rating }}/5)</h3>
+            <p>{{ review.comment }}</p>
+            <small>
+                Por: {{ review.user.username }} — {{ review.created_at|date:"d/m/Y H:i" }}
+            </small>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No hay reseñas todavía.</p>
+{% endif %}
+
+</body>
+</html>
+

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Registro</title>
+  <style>
+    body { font-family: system-ui, Arial; max-width: 780px; margin: 40px auto; }
+    .card { border: 1px solid #ddd; padding: 16px; border-radius: 10px; }
+    input { padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%; }
+    .btn { padding: 10px 16px; border: 0; background: #111; color: #fff; border-radius: 8px; cursor: pointer; }
+    .btn:hover { opacity: .9; }
+    a { text-decoration: none; }
+    .errorlist { color: crimson; list-style: none; padding-left: 0; }
+  </style>
+</head>
+<body>
+  <a href="/">← Volver al inicio</a>
+  <h1>Crear cuenta</h1>
+  <div class="card">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <p>
+        {{ form.username.label_tag }}<br>
+        {{ form.username }}
+        {{ form.username.errors }}
+      </p>
+      <p>
+        {{ form.email.label_tag }}<br>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </p>
+      <p>
+        {{ form.password.label_tag }}<br>
+        {{ form.password }}
+        {{ form.password.errors }}
+      </p>
+      <p>
+        {{ form.password_confirm.label_tag }}<br>
+        {{ form.password_confirm }}
+        {{ form.password_confirm.errors }}
+      </p>
+      <button class="btn" type="submit">Registrarme</button>
+    </form>
+    <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+  </div>
+</body>
+</html>
+

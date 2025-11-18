@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Películas de aventura</title>
+  <style>
+    body { font-family: system-ui, Arial; max-width: 900px; margin: 40px auto; }
+    .movie-card { border: 1px solid #ddd; padding: 16px; border-radius: 10px; margin-bottom: 18px; }
+    .review { border-top: 1px solid #eee; padding-top: 8px; margin-top: 8px; font-size: 0.9rem; }
+    .badge { display: inline-block; padding: 2px 8px; background: #eee; border-radius: 999px; font-size: 0.8rem; }
+    .btn { padding: 8px 16px; border: 0; background: #111; color: #fff; border-radius: 8px; cursor: pointer; font-size: 0.9rem; }
+    .btn:hover { opacity: .9; }
+    a { text-decoration: none; color: #111; }
+    small { color: #666; }
+  </style>
+</head>
+<body>
+
+<a href="/">← Volver al inicio</a>
+
+<h1>Películas (2020–2025)</h1>
+
+{% if request.user.is_authenticated %}
+  <p>
+    Hola, <strong>{{ request.user.username }}</strong> |
+    <a href="{% url 'logout' %}">Cerrar sesión</a>
+  </p>
+
+  <p>
+    <a href="{% url 'add_movie' %}">
+      <button class="btn">Agregar película</button>
+    </a>
+
+    <a href="{% url 'my_reviews' %}">
+      <button class="btn">Mis reseñas</button>
+    </a>
+  </p>
+
+{% else %}
+  <p>
+    <a href="{% url 'login' %}">Inicia sesión</a> o
+    <a href="{% url 'register' %}">Regístrate</a> para agregar reseñas.
+  </p>
+{% endif %}
+
+<hr>
+
+{% for movie in movies %}
+  <div class="movie-card">
+    <h2>{{ movie.title }} <small>({{ movie.year }})</small></h2>
+    <p>{{ movie.description }}</p>
+
+    {% if movie.reviews.count %}
+      <p><span class="badge">{{ movie.reviews.count }} reseña(s)</span></p>
+      {% for r in movie.reviews.all %}
+        <div class="review">
+          <strong>{{ r.user.username }}</strong> — {{ r.rating }}/5<br>
+          {{ r.comment }}<br>
+          <small>{{ r.created_at|date:"d/m/Y H:i" }}</small>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No hay reseñas todavía.</p>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+      <p>
+        <a href="{% url 'add_review' movie.id %}">
+          <button class="btn">Agregar reseña</button>
+        </a>
+      </p>
+    {% endif %}
+
+  </div>
+{% empty %}
+  <p>No hay películas registradas.</p>
+{% endfor %}
+
+</body>
+</html>
+

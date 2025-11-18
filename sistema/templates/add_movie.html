@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Agregar película</title>
+  <style>
+    body { font-family: system-ui; max-width: 780px; margin: 40px auto; }
+    .card { border:1px solid #ddd; padding:16px; border-radius:10px; }
+    input, textarea { width:100%; padding:10px; border:1px solid #ccc; border-radius:8px; }
+    .btn { padding:10px 16px; background:#111; color:#fff; border:0; border-radius:8px; cursor:pointer; }
+    .btn:hover { opacity:.9; }
+  </style>
+</head>
+<body>
+
+<a href="/movies/">← Volver</a>
+
+<h1>Agregar película</h1>
+
+<div class="card">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Guardar película</button>
+  </form>
+</div>
+
+</body>
+</html>
+
