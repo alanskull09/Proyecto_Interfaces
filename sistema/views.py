@@ -102,4 +102,109 @@ def add_movie(request):
 def my_reviews(request):
     reviews = Review.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'my_reviews.html', {'reviews': reviews})
+    
+    # ======================================================
+# API PARA CHATBOT (SIN DRF, SOLO DJANGO PURO)
+# ======================================================
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+def api_movies(request):
+    movies = Movie.objects.all().order_by('-created_at')
+    data = []
+
+    for m in movies:
+        data.append({
+            "id": m.id,
+            "title": m.title,
+            "description": m.description,
+            "year": m.year,
+            "genre": m.genre,
+            "created_at": m.created_at.isoformat(),
+        })
+
+    return JsonResponse(data, safe=False)
+
+
+def api_movie_reviews(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    reviews = movie.reviews.all().order_by('-created_at')
+
+    data = []
+    for r in reviews:
+        data.append({
+            "id": r.id,
+            "movie_id": movie.id,
+            "user": r.user.username,
+            "rating": r.rating,
+            "comment": r.comment,
+            "created_at": r.created_at.isoformat(),
+        })
+
+    return JsonResponse(data, safe=False)
+
+
+def api_reviews(request):
+    reviews = Review.objects.all().order_by('-created_at')
+
+    data = []
+    for r in reviews:
+        data.append({
+            "id": r.id,
+            "movie_title": r.movie.title,
+            "movie_id": r.movie.id,
+            "user": r.user.username,
+            "rating": r.rating,
+            "comment": r.comment,
+            "created_at": r.created_at.isoformat(),
+        })
+
+    return JsonResponse(data, safe=False)
+
+
+@csrf_exempt
+def api_add_movie(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=400)
+
+    try:
+        body = json.loads(request.body)
+        movie = Movie.objects.create(
+            title=body["title"],
+            description=body.get("description", ""),
+            year=body["year"],
+            genre=body.get("genre", "Aventura"),
+        )
+        movie.save()
+
+        return JsonResponse({"status": "ok", "id": movie.id})
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=400)
+
+
+@csrf_exempt
+def api_add_review(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=400)
+
+    try:
+        body = json.loads(request.body)
+
+        movie = Movie.objects.get(id=body["movie_id"])
+
+        user = request.user if request.user.is_authenticated else None
+
+        review = Review.objects.create(
+            movie=movie,
+            user=user,
+            rating=body["rating"],
+            comment=body["comment"]
+        )
+        review.save()
+
+        return JsonResponse({"status": "ok", "id": review.id})
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=400)
+
 
