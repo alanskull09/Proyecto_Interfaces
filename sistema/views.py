@@ -104,7 +104,7 @@ def my_reviews(request):
     return render(request, 'my_reviews.html', {'reviews': reviews})
     
     # ======================================================
-# API PARA CHATBOT (SIN DRF, SOLO DJANGO PURO)
+# API PARA CHATBOT
 # ======================================================
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
